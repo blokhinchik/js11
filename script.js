@@ -124,6 +124,27 @@
 // }
 
 //Currency exchange
+// let currency = prompt("Ты хочешь поменять: USD или EUR?").toUpperCase();
+// let isBuying = confirm(
+//   "Если ты хочешь купить нажми ОК, а если хочешь продать нажми ОТМЕНА"
+// );
+
+// let rate;
+
+// if (currency === "USD") {
+//   rate = isBuying ? 39.05 : 38.75;
+// } else if (currency === "EUR") {
+//   rate = isBuying ? 41.2 : 40.8;
+// } else {
+//   alert("У нас нет такой валюты!!!");
+// }
+
+// if (rate) {
+//   let money = +prompt("Введите сумму на обмен:");
+//   let result = isBuying ? money / rate : money * rate;
+//   let str = isBuying ? "потратили" : "получили";
+//   alert(`Вы ${str} ${result} грн!`);
+// }
 
 // Scissors
 // let userChoice = prompt("Введите ваш выбор: камень, ножницы или бумага");
@@ -291,5 +312,27 @@ if (exercise === "Number: odd") {
     alert("Вы победили!");
   } else {
     alert("Компьютер победил!");
+  }
+} else if (exercise === "Currency exchange") {
+  let currency = prompt("Ты хочешь поменять: USD или EUR?").toUpperCase();
+  let isBuying = confirm(
+    "Если ты хочешь купить нажми ОК, а если хочешь продать нажми ОТМЕНА"
+  );
+
+  let rate;
+
+  if (currency === "USD") {
+    rate = isBuying ? 39.05 : 38.75;
+  } else if (currency === "EUR") {
+    rate = isBuying ? 41.2 : 40.8;
+  } else {
+    alert("У нас нет такой валюты!!!");
+  }
+
+  if (rate) {
+    let money = +prompt("Введите сумму на обмен:");
+    let result = isBuying ? money / rate : money * rate;
+    let str = isBuying ? "потратили" : "получили";
+    alert(`Вы ${str} ${result} грн!`);
   }
 }
