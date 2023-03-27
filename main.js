@@ -346,13 +346,63 @@
 // console.log(etc);
 
 // Currency real rate !!!
-// НЕ СДЕЛАЛ
+// fetch("https://open.er-api.com/v6/latest/USD")
+//   .then((res) => res.json())
+//   .then((data) => {
+//     let rates = data.rates;
+//     let cell = prompt(
+//       "Введите валюту которую вы хотите продать:"
+//     ).toUpperCase();
+//     let buy = prompt("Введите валюту которую вы хотите купить: ").toUpperCase();
+//     let summa = prompt("Введите сумму: ");
+//     if (
+//       rates[cell] === data.rates[cell] &&
+//       rates[buy] === data.rates[buy] &&
+//       rates[buy] !== undefined
+//     ) {
+//       rates = (summa * data.rates[buy]) / data.rates[cell];
+//       console.log(`Вы получили ${Math.round(rates)} ${buy}`);
+//     } else {
+//       console.log("Некорректное значение валют!");
+//     }
+//   });
 
 // Currency drop down !!!
-// Это связано с предыдущим заданием
+// fetch("https://open.er-api.com/v6/latest/USD")
+//   .then((res) => res.json())
+//   .then((data) => {
+//     let str = `<select>`;
+//     for (const key in data.rates) {
+//       str += `<option value = "${key}">${key}</option>`;
+//     }
+//     str += `</select>`;
+//     document.write(str);
+//   });
 
 // Currency table !!!
-// И для этого нужно сделать предыдущее
+// fetch("https://open.er-api.com/v6/latest/USD")
+//   .then((res) => res.json())
+//   .then((data) => {
+//     let column = [];
+//     for (const i in data.rates) {
+//       column.push(i);
+//     }
+//     let table = `<table><tr><td></td>`;
+//     for (const i in column) {
+//       table += `<th>${column[i]}</th>`;
+//     }
+//     table += `</tr>`;
+
+//     for (const i in column) {
+//       table += `<tr><th>${column[i]}</th>`;
+//       for (const j in column) {
+//         table += `<td>${data.rates[column[i]] / data.rates[column[j]]}</td>`;
+//       }
+//       table += `</tr>`;
+//     }
+//     table += `</table>`;
+//     document.write(table);
+//   });
 
 // Form !!!
 // const car = {
