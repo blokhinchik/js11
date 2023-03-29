@@ -73,20 +73,21 @@
 // console.log(prompt2(question, defaultName));
 
 // Login And Password !!!
-// const admin = "admin";
-// const password = "password";
-// const authorization = (login, password) => {
-//   let log = prompt("Login: ");
-//   let pass = prompt("Password: ");
+// const authorization = (correctLogin, correctPassword) => {
+//   let userLogin = prompt("Login: ");
+//   let userPassword = prompt("Password: ");
 
-//   if (log === login && pass === password) {
+//   if (userLogin === correctLogin && userPassword === correctPassword) {
 //     return true;
 //   } else {
 //     return false;
 //   }
 // };
-
-// console.log(authorization(admin, password));
+// if (authorization("admin", "qwerty")) {
+//   console.log("Данные введены верно)))");
+// } else {
+//   console.log("Вы ввели неправильные данные!!!");
+// }
 
 // FOR TABLE !!!
 // const arr = [
@@ -202,3 +203,54 @@
 // console.log(sortNewFunction(persons, "age"));
 
 // TABLE !!!
+
+// CALC FUNC !!!
+// const math = (distance, consumption, price) => {
+//   let spendMoney = distance * (consumption / 100) * price;
+//   return spendMoney;
+// };
+
+// console.log(math(100, 8, 50));
+
+// CALC LIVE !!!
+// const calcMoneyOfConsumption = () => {
+//   const distance = document.getElementById("distance");
+//   const consumption = document.getElementById("consumption");
+//   const price = document.getElementById("price");
+//   const divResult = document.getElementById("divResult");
+
+//   const distanceValue = Number(distance.value);
+//   const consumptionValue = Number(consumption.value);
+//   const priceValue = Number(price.value);
+
+//   if (consumptionValue === 0) {
+//     divResult.innerHTML = "Введите расход";
+//   } else if (priceValue === 0) {
+//     divResult.innerHTML = "Введите цену бензина";
+//   } else {
+//     const result = distanceValue * (consumptionValue / 100) * priceValue;
+//     divResult.innerHTML = `Вы потратили ${result.toFixed(
+//       1
+//     )} грн за ${distanceValue} км`;
+//   }
+// };
+
+// distance.oninput = consumption.oninput = price.oninput = calcMoneyOfConsumption;
+
+// DIVIDE !!!
+// const calcResult = () => {
+//   const firstInput = document.getElementById("firstNumber");
+//   const secondInput = document.getElementById("secondNumber");
+//   const resultDiv = document.getElementById("divisionResult");
+
+//   const firstValue = Number(firstInput.value);
+//   const secondValue = Number(secondInput.value);
+//   if (secondValue === 0) {
+//     resultDiv.innerHTML = "Данное число на 0 не множится!";
+//   } else {
+//     const result = firstValue / secondValue;
+//     resultDiv.innerHTML = `Result: ${result.toFixed(2)}`;
+//   }
+// };
+
+// firstNumber.oninput = secondNumber.oninput = calcResult;
