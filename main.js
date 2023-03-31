@@ -132,7 +132,31 @@
 // console.log(filter(text));
 
 // CURRENCY TABLE !!!
-// ДЛЯ ЭТОГО ЗАДАНИЯ Я НЕ СДЕЛАЛ ЗАДАНИЕ С ПРОШЛОЙ ЛЕКЦИИ
+// const currTable = async () => {
+//   const arr = [];
+//   const res = await fetch("https://open.er-api.com/v6/latest/USD");
+//   const data = await res.json();
+//   const rates = data.rates;
+//   const currencies = Object.keys(rates);
+//   arr.push(JSON.parse(JSON.stringify(currencies)));
+//   arr[0].unshift(" ");
+//   for (const currency1 of currencies) {
+//     const row = [currency1];
+//     for (const currency2 of currencies) {
+//       if (currency1 === currency2) {
+//         row.push("1.00");
+//       } else {
+//         const crossRate = rates[currency2] / rates[currency1];
+//         const result = crossRate.toFixed(2);
+//         row.push(`${result}`);
+//       }
+//     }
+//     arr.push(row);
+//   }
+//   forTable(arr);
+// };
+
+// currTable();
 
 // FORM !!!
 // const persons = [
