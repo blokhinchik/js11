@@ -73,84 +73,88 @@
 
 // CREATE PERSON CLOSURE !!!
 
-// const createPersonClosure = (name, surname) => {
-//   let age;
-//   let fatherName;
-//   const getName = () => {
-//     return name;
-//   };
-//   const getSurname = () => {
-//     return surname;
-//   };
-//   const getFatherName = () => {
-//     return fatherName;
-//   };
-//   const getAge = () => {
-//     return age;
-//   };
-//   const getFullName = () => {
-//     return `${name}  ${surname}  ${fatherName}`;
-//   };
-//   const setName = (newName) => {
-//     if (
-//       typeof newName === "string" &&
-//       newName[0] === newName[0].toUpperCase()
-//     ) {
-//       name = newName;
-//     }
-//     return name;
-//   };
-//   const setSurname = (newSurname) => {
-//     if (
-//       typeof newSurname === "string" &&
-//       newSurname[0] === newSurname[0].toUpperCase()
-//     ) {
-//       surname = newSurname;
-//     }
-//     return surname;
-//   };
-//   const setFatherName = (newFatherName) => {
-//     if (
-//       typeof newFatherName === "string" &&
-//       newFatherName[0] === newFatherName[0].toUpperCase()
-//     ) {
-//       fatherName = newFatherName;
-//     }
-//     return fatherName;
-//   };
-//   const setAge = (newAge) => {
-//     if (newAge > 0 && newAge <= 100) {
-//       age = Number(newAge);
-//     }
-//     return age;
-//   };
-//   const setFullName = (newFullName) => {
-//     if (typeof newFullName === "string") {
-//       const fullName = newFullName.split(" ");
-//       if (fullName[0][0] === fullName[0][0].toUpperCase()) {
-//         surname = fullName[0];
-//       }
-//       if (fullName[1][0] === fullName[1][0].toUpperCase()) {
-//         name = fullName[1];
-//       }
-//       if (fullName[2][0] === fullName[2][0].toUpperCase()) {
-//         fatherName = fullName[2];
-//       }
-//     }
-//   };
-//   return {
-//     getName,
-//     getSurname,
-//     getFatherName,
-//     getAge,
-//     getFullName,
-//     setAge,
-//     setFatherName,
-//     setFullName,
-//     setName,
-//     setSurname,
-//   };
-// };
+const createPersonClosure = (name, surname) => {
+  let age;
+  let fatherName;
+  const getName = () => {
+    return name;
+  };
+  const getSurname = () => {
+    return surname;
+  };
+  const getFatherName = () => {
+    return fatherName;
+  };
+  const getAge = () => {
+    return age;
+  };
+  const getFullName = () => {
+    return `${name}  ${surname}  ${fatherName}`;
+  };
+  const setName = (newName) => {
+    if (
+      typeof newName === "string" &&
+      newName[0] === newName[0].toUpperCase()
+    ) {
+      name = newName;
+    }
+    return name;
+  };
+  const setSurname = (newSurname) => {
+    if (
+      typeof newSurname === "string" &&
+      newSurname[0] === newSurname[0].toUpperCase()
+    ) {
+      surname = newSurname;
+    }
+    return surname;
+  };
+  const setFatherName = (newFatherName) => {
+    if (
+      typeof newFatherName === "string" &&
+      newFatherName[0] === newFatherName[0].toUpperCase()
+    ) {
+      fatherName = newFatherName;
+    }
+    return fatherName;
+  };
+  const setAge = (newAge) => {
+    if (newAge > 0 && newAge <= 100) {
+      age = Number(newAge);
+    }
+    return age;
+  };
+  const setFullName = (newFullName) => {
+    if (typeof newFullName === "string") {
+      const fullName = newFullName.split(" ");
+      if (fullName.length === 3) {
+        if (fullName[0][0] === fullName[0][0].toUpperCase()) {
+          name = fullName[0];
+        }
+        if (fullName[1][0] === fullName[1][0].toUpperCase()) {
+          surname = fullName[1];
+        }
+        if (fullName[2][0] === fullName[2][0].toUpperCase()) {
+          fatherName = fullName[2];
+        }
+      } else {
+        return newFullName;
+      }
+    }
+  };
+  return {
+    getName,
+    getSurname,
+    getFatherName,
+    getAge,
+    getFullName,
+    setAge,
+    setFatherName,
+    setFullName,
+    setName,
+    setSurname,
+  };
+};
 // const a = createPersonClosure("Вася", "Пупкін");
 // const b = createPersonClosure("Ганна", "Іванова");
 // console.log(a.getName());
@@ -219,18 +223,50 @@
 // console.log(arr);
 // console.log(isSorted(...arr));
 
-// PERSON FORM !!! ????????????
+// PERSON FORM !!!
+
+const divParent = document.getElementById("divParent");
+const test = createPersonClosure();
+test.setAge(24);
+test.setFullName("Блохин Дмитрий Игорович");
 
 const personForm = (parent, person) => {
-	const nameInput = document.createElement("input")
-	nameInput.value = person.getName()
-	parent.appendChild(nameInput)
-	const surnameInput = document.createElement("input")
-	parent.appendChild(surnameInput)
-	const fatherNameInput = document.createElement("input")
-	parent.appendChild(fatherNameInput)
-	const ageInput = document.createElement("input")
-	parent.appendChild(ageInput)
-	const fullNameInput = document.createElement("input")
-	parent.appendChild(fullNameInput)
-}
+  const inputName = document.createElement("input");
+  inputName.value = person.getName();
+  inputName.placeholder = "Name";
+  inputName.oninput = () => {
+    const name = person.setName(inputName.value);
+    inputName.value = name;
+  };
+  parent.append(inputName);
+  const inputSurname = document.createElement("input");
+  inputSurname.value = person.getSurname();
+  inputSurname.oninput = () => {
+    const surname = person.setSurname(inputSurname.value);
+    inputSurname.value = surname;
+  };
+  parent.append(inputSurname);
+  const inputFatherName = document.createElement("input");
+  inputFatherName.value = person.getFatherName();
+  inputFatherName.oninput = () => {
+    const fatherName = person.setFatherName(inputFatherName.value);
+    inputFatherName.value = fatherName;
+  };
+  parent.append(inputFatherName);
+  const inputAge = document.createElement("input");
+  inputAge.value = person.getAge();
+  inputAge.oninput = () => {
+    const age = person.setAge(inputAge.value);
+    inputAge.value = age;
+  };
+  parent.append(inputAge);
+  const inputFullName = document.createElement("input");
+  inputFullName.value = person.getFullName();
+  inputFullName.oninput = () => {
+    const fullName = person.setFullName(inputFullName.value);
+    inputFullName.value = fullName;
+  };
+  parent.append(inputFullName);
+};
+
+personForm(divParent, test);
