@@ -230,43 +230,152 @@ const test = createPersonClosure();
 test.setAge(24);
 test.setFullName("Блохин Дмитрий Игорович");
 
-const personForm = (parent, person) => {
-  const inputName = document.createElement("input");
-  inputName.value = person.getName();
-  inputName.placeholder = "Name";
-  inputName.oninput = () => {
-    const name = person.setName(inputName.value);
-    inputName.value = name;
-  };
-  parent.append(inputName);
-  const inputSurname = document.createElement("input");
-  inputSurname.value = person.getSurname();
-  inputSurname.oninput = () => {
-    const surname = person.setSurname(inputSurname.value);
-    inputSurname.value = surname;
-  };
-  parent.append(inputSurname);
-  const inputFatherName = document.createElement("input");
-  inputFatherName.value = person.getFatherName();
-  inputFatherName.oninput = () => {
-    const fatherName = person.setFatherName(inputFatherName.value);
-    inputFatherName.value = fatherName;
-  };
-  parent.append(inputFatherName);
-  const inputAge = document.createElement("input");
-  inputAge.value = person.getAge();
-  inputAge.oninput = () => {
-    const age = person.setAge(inputAge.value);
-    inputAge.value = age;
-  };
-  parent.append(inputAge);
-  const inputFullName = document.createElement("input");
-  inputFullName.value = person.getFullName();
-  inputFullName.oninput = () => {
-    const fullName = person.setFullName(inputFullName.value);
-    inputFullName.value = fullName;
-  };
-  parent.append(inputFullName);
-};
+// const personForm = (parent, person) => {
+//   const inputName = document.createElement("input");
+//   inputName.value = person.getName();
+//   inputName.type = "text";
+//   inputName.placeholder = "Name";
+//   inputName.oninput = () => {
+//     const name = person.setName(inputName.value);
+//     inputName.value = name;
+//   };
+//   parent.append(inputName);
 
-personForm(divParent, test);
+//   const inputSurname = document.createElement("input");
+//   inputSurname.type = "text";
+//   inputSurname.value = person.getSurname();
+//   inputSurname.oninput = () => {
+//     const surname = person.setSurname(inputSurname.value);
+//     inputSurname.value = surname;
+//   };
+//   parent.append(inputSurname);
+
+//   const inputFatherName = document.createElement("input");
+//   inputFatherName.value = person.getFatherName();
+//   inputFatherName.type = "text";
+//   inputFatherName.oninput = () => {
+//     const fatherName = person.setFatherName(inputFatherName.value);
+//     inputFatherName.value = fatherName;
+//   };
+//   parent.append(inputFatherName);
+
+//   const inputAge = document.createElement("input");
+//   inputAge.value = person.getAge();
+//   inputAge.type = "number";
+//   inputAge.oninput = () => {
+//     const age = person.setAge(inputAge.value);
+//     inputAge.value = age;
+//   };
+//   parent.append(inputAge);
+
+//   const inputFullName = document.createElement("input");
+//   inputFullName.value = person.getFullName();
+//   inputFullName.type = "text";
+//   inputFullName.oninput = () => {
+// 		person.setFullName(inputFullName.value);
+//     inputFullName.value = person.getFullName();
+//     inputName.value = person.getName();
+//     inputSurname.value = person.getSurname();
+//     inputFatherName.value = person.getFatherName();
+//   };
+//   parent.append(inputFullName);
+// };
+
+// personForm(divParent, test);
+
+// GETSETFORM !!!
+
+//getSetForm
+
+function getSetForm(parent, object) {
+  let register = {};
+  const updateInputs = () => {
+    for (key in register) {
+      const getKey = `get` + key;
+      if (getKey in object) {
+        let getValue = object[getKey]();
+        register[key].value = getValue;
+      }
+    }
+  };
+  for (func in object) {
+    const isGet = func.startsWith("get");
+    const fieldName = func.slice(3);
+    const setKey = `set` + fieldName;
+    const getKey = `get` + fieldName;
+    if (isGet) {
+      const input = document.createElement("input");
+      const type = typeof object[getKey]();
+      if (type === "boolean") {
+        input.type = "checkbox";
+      } else if (type === "number") {
+        input.type = "number";
+      } else {
+        input.type = "text";
+      }
+      if (!(setKey in object)) {
+        input.disabled = true;
+      }
+      input.placeholder = `${fieldName}`;
+      input.oninput = () => {
+        object[setKey](input.value);
+        input.value = object[getKey]();
+        updateInputs();
+      };
+
+      parent.appendChild(input);
+      register[fieldName] = input;
+    }
+  }
+  updateInputs();
+}
+
+let car;
+{
+  let brand = "BMW",
+    model = "X5",
+    volume = 2.4;
+  car = {
+    getBrand() {
+      return brand;
+    },
+    setBrand(newBrand) {
+      if (newBrand && typeof newBrand === "string") {
+        brand = newBrand;
+      }
+      return brand;
+    },
+
+    getModel() {
+      return model;
+    },
+    setModel(newModel) {
+      if (newModel && typeof newModel === "string") {
+        model = newModel;
+      }
+      return model;
+    },
+
+    getVolume() {
+      return volume;
+    },
+    setVolume(newVolume) {
+      newVolume = +newVolume;
+      if (newVolume && newVolume > 0 && newVolume < 20) {
+        volume = newVolume;
+      }
+      return volume;
+    },
+
+    getTax() {
+      return volume * 100;
+    },
+  };
+}
+
+const testDiv = document.getElementById("testdiv");
+const testDiv2 = document.getElementById("testdiv2");
+
+getSetForm(formDiv, test);
+getSetForm(testDiv, createPersonClosure("Анон", "Анонов"));
+getSetForm(testDiv2, car);
