@@ -1,12 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    
-</body>
+    <style>
+      #partOne {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+      }
+
+      form {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        margin: 20px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fff;
+      }
+
+      select {
+        margin-bottom: 20px;
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+      label {
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+
+      input {
+        margin-bottom: 20px;
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        width: 100px;
+      }
+      .partTwo {
+        display: flex;
+        flex-direction: column;
+        margin: 20px;
+        align-items: center;
+      }
+
+      button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        border-radius: 5px;
+
+        border: 1px solid #ccc;
+
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="store">
+      <div id="partOne"></div>
+
+      <form action="#">
+        <div class="partTwo">
+          <label for="product-select">Выберите продукт:</label>
+          <select id="product-select"></select>
+        </div>
+        <div class="partTwo">
+          <label for="amount-input">Введите количество снов:</label>
+          <input type="number" id="amount-input" min="1" value="1" />
+        </div>
+        <div class="partTwo">
+          <label for="money-input">Введите количество денег:</label>
+          <input type="number" id="money-input" min="1" value="100" />
+        </div>
+
+        <div class="partTwo">
+          <button id="buy-button">Купить</button>
+        </div>
+      </form>
+    </div>
+
+    <script src="./main.js"></script>
+  </body>
 </html>
