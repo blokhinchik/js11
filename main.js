@@ -26,12 +26,12 @@ function reducer(state, { type, item, amount, money }) {
   if (!state) {
     return {
       products: {
-        dreamAboutEating: { quantity: 100, price: 25 },
-        dreamAboutTrip: { quantity: 100, price: 125 },
-        dreamAboutBigLove: { quantity: 100, price: 250 },
+        beer: { quantity: 100, price: 25 },
+        bread: { quantity: 100, price: 10 },
+        meat: { quantity: 100, price: 50 },
       },
 
-      cash: 10000,
+      cash: 1000,
     };
   }
 
@@ -40,13 +40,13 @@ function reducer(state, { type, item, amount, money }) {
 
     if (product.quantity < amount && amount * product.price > money) {
       console.log(
-        " Здаеться менi,що у вас недостатньо коштiв, а у нас снiв. Тож приходь завтра."
+        " Здаеться менi,що у вас недостатньо коштiв, а у нас товарiв."
       );
       return state;
     }
 
     if (product.quantity < amount) {
-      console.log("В нашому магазині закінчилися сни.");
+      console.log("В нашому магазині закінчився товар.");
       return state;
     }
     if (amount * product.price > money) {
@@ -54,18 +54,15 @@ function reducer(state, { type, item, amount, money }) {
       return state;
     }
 
-    // product.quantity -= amount;
-
     return {
       ...state,
       products: {
         ...state.products,
         [item]: {
           ...state.products[item],
-          quantity: state.products[item].quantity - amount
-        }
+          quantity: state.products[item].quantity - amount,
+        },
       },
-      // state.products[item] : {...state.products[item], state.products[item].quantity -= amount;},
       cash: state.cash + money,
     };
   }
@@ -90,7 +87,7 @@ function makeStore(state) {
 
     productDiv.style.flexDirection = "column";
     productDiv.style.alignItems = "center";
-    productDiv.style.border = "1px solid green";
+    productDiv.style.border = "1px solid red";
     productDiv.style.borderRadius = "10px";
 
     const nameP = document.createElement("div");
