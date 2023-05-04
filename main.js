@@ -221,7 +221,7 @@ function loginPromise(parent) {
       resolve({ login: form.getLogin(), password: form.getPassword() });
     };
   }
-
+ 
   return new Promise(executor);
 }
 
