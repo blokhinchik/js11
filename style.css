@@ -1,0 +1,43 @@
+/* body {
+	background-image: url("./1670307401_2-1.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+#traffic-light {
+	width: 30px;
+	height: 70px;
+	background-color: #333;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+	margin-top: 220px;
+	margin-left: 800px;
+}
+.line{
+	border: 1px solid black;
+	height: 80px;
+	width: 5px;
+	background-color: black;
+	margin-left: 820px;
+}
+.light {
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+}
+
+#red {
+	background-color: grey;
+}
+
+#yellow {
+	background-color: grey;
+}
+
+#green {
+	background-color: grey;
+} */
