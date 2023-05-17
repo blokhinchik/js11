@@ -28,91 +28,91 @@
 
 // Stage 6
 
-// async function jsonPost(url, data) {
-//   return await fetch(url, {
-//     method: "POST",
-//     body: JSON.stringify(data),
-//   }).then((res) => {
-//     if (!res.ok) {
-//       throw new Error(`status: ${res.status}`);
-//     }
-//     return res.json();
-//   });
-// }
+async function jsonPost(url, data) {
+  return await fetch(url, {
+    method: "POST",
+    body: JSON.stringify(data),
+  }).then((res) => {
+    if (!res.ok) {
+      throw new Error(`status: ${res.status}`);
+    }
+    return res.json();
+  });
+}
 
-// const form = document.createElement("form");
+const form = document.createElement("form");
 
-// const userName = document.createElement("input");
-// userName.placeholder = "Name";
-// userName.style = "width: 70px; margin-right: 20px";
+const userName = document.createElement("input");
+userName.placeholder = "Name";
+userName.style = "width: 70px; margin-right: 20px";
 
-// const text = document.createElement("input");
-// text.placeholder = "Enter text";
-// text.style = "margin-right: 5px";
+const text = document.createElement("input");
+text.placeholder = "Enter text";
+text.style = "margin-right: 5px";
 
-// const button = document.createElement("button");
-// button.innerText = "Send";
-// button.onclick = sendAndCheck;
-// form.append(userName, text, button);
+const button = document.createElement("button");
+button.innerText = "Send";
+button.onclick = sendAndCheck;
+form.append(userName, text, button);
 
-// const container = document.createElement("div");
-// document.body.append(container);
-// container.append(form);
+const container = document.createElement("div");
+document.body.append(container);
+container.append(form);
 
-// const sms = document.createElement("div");
-// container.append(sms);
+const sms = document.createElement("div");
+container.append(sms);
 
-// let updateMessageId = 0;
+let updateMessageId = 0;
+async function sendAndCheck() {
+  event.preventDefault();
+  await sendMessage(userName.value, text.value);
+  userName.value = "";
+  text.value = "";
+  await getMessages();
+  updateMessageId = updateMessageId
+    ? updateMessageId
+    : allMessages.nextMessageId + 1;
+}
+async function sendMessage(nick, message) {
+  return await jsonPost("http://students.a-level.com.ua:10012", {
+    func: "addMessage",
+    nick,
+    message,
+  });
+}
 
-// async function sendMessage(nick, message) {
-//   return await jsonPost("http://students.a-level.com.ua:10012", {
-//     func: "addMessage",
-//     nick,
-//     message,
-//   });
-// }
+async function getMessages() {
+  const allMessages = await jsonPost("http://students.a-level.com.ua:10012", {
+    func: "getMessages",
+    messageId: updateMessageId,
+  });
+  for (const message of allMessages.data) {
+    let messageDiv = document.createElement("div");
+    let nick = document.createElement("span");
+    nick.innerText = `${message.nick}: `;
+    nick.style.fontWeight = "bold";
+    messageDiv.append(nick);
+    let messageText = message.message;
+    messageDiv.append(messageText);
+    sms.prepend(messageDiv);
+  }
+}
 
-// async function getMessages() {
-//   const allMessages = await jsonPost("http://students.a-level.com.ua:10012", {
-//     func: "getMessages",
-//     messageId: updateMessageId,
-//   });
-//   updateMessageId = allMessages.nextMessageId;
-//   for (let message of allMessages.data) {
-//     const messageDiv = document.createElement("div");
-//     const nick = document.createElement("span");
-//     nick.innerText = `${message.nick}: `;
-//     nick.style.fontWeight = "bold";
-//     messageDiv.append(nick);
-//     const messageText = message.message;
-//     messageDiv.append(messageText);
-//     sms.prepend(messageDiv);
-//   }
-// }
+const delay = (ms) => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};
 
-// async function sendAndCheck() {
-//   event.preventDefault();
-//   await sendMessage(userName.value, text.value);
-//   userName.value = "";
-//   text.value = "";
-//   await getMessages();
-// }
+async function checkLoop() {
+  while (true) {
+    await getMessages();
+    await delay(5000);
+  }
+}
+function clearMemory() {
+  window.location.reload(); // Reload the page to clear memory
+}
 
-// const delay = (ms) => {
-//   return new Promise((resolve) => setTimeout(resolve, ms));
-// };
-
-// async function checkLoop() {
-//   while (true) {
-//     await getMessages();
-//     await delay(5000);
-//   }
-// }
-// function clearMemory() {
-//   window.location.reload(); // Reload the page to clear memory
-// }
-
-// window.onload = () => {
-//   checkLoop();
-//   setInterval(clearMemory, 60000);
-// };
+window.onload = () => {
+  checkLoop();
+  setInterval(clearMemory, 60000);
+};
